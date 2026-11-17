@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cief-net"
+version = "1.0.0"
+description = "Instance segmentation of fungal conidia with DINOv3, DoRA, a star-convex head and polar harmonic contour refinement"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "CC-BY-NC-4.0" }
+authors = [
+  { name = "Sebastian Ojeda" }, { name = "Sebastian Cely" }, { name = "Astrid M. Aguilera" },
+  { name = "Elkin Alfredo Moreno" }, { name = "Claudia Patricia Guerrero Arroyave" },
+  { name = "Sergio Andres Correal Cuervo" },
+]
+dependencies = [
+  "torch>=2.1", "torchvision>=0.16", "transformers>=4.56", "peft>=0.13", "stardist>=0.9",
+  "torchmetrics[detection]>=1.4", "pycocotools>=2.0", "numpy", "scipy", "pandas", "pillow",
+  "scikit-image", "matplotlib", "tqdm",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["cief_net*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

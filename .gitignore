@@ -1,0 +1,31 @@
+# data, weights and outputs (distributed separately)
+data/**
+!data/**/
+!data/README.md
+!data/**/.gitkeep
+checkpoints/**
+!checkpoints/**/
+!checkpoints/README.md
+!checkpoints/**/.gitkeep
+runs/
+*.pt
+*.pth
+*.safetensors
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# environments and editors
+.venv/
+venv/
+.env
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,17 @@
+# Install PyTorch with the CUDA build that matches your driver first:
+#   https://pytorch.org/get-started/locally/
+torch>=2.1
+torchvision>=0.16
+transformers>=4.56    # DINOv3 support
+peft>=0.13            # DoRA (use_dora=True)
+stardist>=0.9
+torchmetrics[detection]>=1.4
+pycocotools>=2.0
+numpy
+scipy
+pandas
+pillow
+scikit-image
+matplotlib
+tqdm
+pytest

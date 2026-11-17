@@ -1,0 +1,24 @@
+Copyright (c) 2026 Universidad de Boyacá and the cIEF-Net authors
+(Sebastian Ojeda, Sebastian Cely, Astrid M. Aguilera, Elkin Alfredo Moreno,
+Claudia Patricia Guerrero Arroyave, Sergio Andres Correal Cuervo).
+
+The original source code, trained model components and annotations in this
+repository are licensed under the Creative Commons
+Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+
+You are free to share (copy and redistribute the material in any medium or
+format) and adapt (remix, transform and build upon the material) under the
+following terms:
+
+  * Attribution: you must give appropriate credit, provide a link to the
+    license and indicate if changes were made.
+  * NonCommercial: you may not use the material for commercial purposes.
+  * No additional restrictions: you may not apply legal terms or
+    technological measures that legally restrict others from doing anything
+    the license permits.
+
+Full legal code: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+Third-party components retain their own licenses, including the DINOv3
+weights (DINOv3 License, Meta Platforms), stardist (BSD-3-Clause), Hugging
+Face transformers and peft (Apache-2.0), and the TgFC images (CC BY 4.0).
