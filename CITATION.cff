@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software, the data or the pretrained models, please cite the article below."
+message: "If you use this software, the data or the pretrained models, please cite it as below."
 title: "cIEF-Net: instance segmentation of fungal conidia and few-shot adaptation across fungal taxa"
 type: software
 version: 1.0.0
@@ -24,21 +24,5 @@ keywords:
   - conidia
   - few-shot adaptation
   - DINOv3
-preferred-citation:
-  type: article
-  title: "Instance-Level Segmentation of Alternaria alternata Conidia and Few-Shot Adaptation across Fungal Taxa"
-  journal: "Plant Methods"
-  year: 2026
-  authors:
-    - family-names: Ojeda
-      given-names: Sebastian
-    - family-names: Cely
-      given-names: Sebastian
-    - family-names: Aguilera
-      given-names: Astrid M.
-    - family-names: Moreno
-      given-names: Elkin Alfredo
-    - family-names: Guerrero Arroyave
-      given-names: Claudia Patricia
-    - family-names: Correal Cuervo
-      given-names: Sergio Andres
+repository-code: "https://github.com/ief-udb/cIEF-Net"
+date-released: 2026-11-17

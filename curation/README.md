@@ -1,7 +1,7 @@
 # Dataset curation
 
-Tools used to build the released collections (Additional file 1, Supplementary
-methods), to be added to this folder:
+Tools used to build the released collections (described in the supplementary
+methods of the manuscript), to be added to this folder:
 
 1. **Duplicate screening.** Exact duplicates are consolidated. Near-duplicate
    images are detected by matching ORB keypoints with RANSAC geometric

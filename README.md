@@ -4,7 +4,7 @@
 
 **Instance-level segmentation of *Alternaria alternata* conidia and few-shot adaptation across fungal taxa**
 
-[![Paper](https://img.shields.io/badge/paper-Plant%20Methods-1f6feb)](#citation)
+[![Data and annotations](https://img.shields.io/badge/data%20%26%20annotations-Zenodo-1682d4)](https://doi.org/10.5281/zenodo.XXXXXXX)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776ab)](#installation)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-ee4c2c)](#installation)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey)](LICENSE)
@@ -20,16 +20,18 @@ a **polar harmonic contour refiner**.
 This repository contains the code to train, evaluate and apply cIEF-Net and to
 reproduce the experiments of the paper.
 
+<!-- Architecture figure: save it as docs/figures/architecture.png -->
 <p align="center">
   <img src="docs/figures/architecture.png" width="90%" alt="Architecture of cIEF-Net">
 </p>
+<p align="center"><em>Architecture of cIEF-Net.</em></p>
 
 ## Contents
 
 - [Method](#method)
 - [Results](#results)
+- [Datasets](#datasets)
 - [Installation](#installation)
-- [Data](#data)
 - [Pretrained models](#pretrained-models)
 - [Quick start: segmenting new images](#quick-start-segmenting-new-images)
 - [Training and evaluation](#training-and-evaluation)
@@ -61,10 +63,10 @@ Source domain, *A. alternata* test set (30 images, mean over three training runs
 
 | Model | AJI | PQ | DQ | SQ | Boundary IoU | Counting MAE |
 |---|---|---|---|---|---|---|
-| Mask R-CNN | 0.705 | 0.702 | 0.815 | **0.860** | 0.330 | 37.3 |
-| Cellpose-SAM | 0.697 | 0.692 | 0.814 | 0.850 | **0.337** | 28.7 |
-| StarDist | 0.716 | 0.736 | 0.871 | 0.844 | 0.309 | 18.1 |
-| YOLO11m-seg | 0.718 | 0.720 | 0.855 | 0.842 | 0.301 | 20.5 |
+| [Mask R-CNN](https://github.com/pytorch/vision) | 0.705 | 0.702 | 0.815 | **0.860** | 0.330 | 37.3 |
+| [Cellpose-SAM](https://github.com/MouseLand/cellpose) | 0.697 | 0.692 | 0.814 | 0.850 | **0.337** | 28.7 |
+| [StarDist](https://github.com/stardist/stardist) | 0.716 | 0.736 | 0.871 | 0.844 | 0.309 | 18.1 |
+| [YOLO11m-seg](https://github.com/ultralytics/ultralytics) | 0.718 | 0.720 | 0.855 | 0.842 | 0.301 | 20.5 |
 | **cIEF-Net** | **0.776** | **0.786** | **0.918** | 0.856 | **0.337** | **15.4** |
 
 Few-shot adaptation, PQ of cIEF-Net (mean over four support sets):
@@ -76,13 +78,27 @@ Few-shot adaptation, PQ of cIEF-Net (mean over four support sets):
 | *Neopestalotiopsis* sp. | 0.800 | 0.821 |
 | *Hortaea werneckii* | 0.746 | 0.754 |
 
-Complete results, standard deviations and paired image-level tests are in the
-paper and its Additional file 1.
+Complete results, standard deviations and paired image-level tests are
+reported in the accompanying manuscript.
+
+### Comparison methods
+
+The benchmark compares cIEF-Net with four methods, each representing a
+different strategy for forming instances. They were trained with their public
+implementations (this repository contains only cIEF-Net); the settings used
+are listed in [`baselines/README.md`](baselines/README.md).
+
+| Method | Instance formation | Implementation |
+|---|---|---|
+| Mask R-CNN (He et al., 2017) | region proposals and per-box masks | [pytorch/vision](https://github.com/pytorch/vision) |
+| Cellpose-SAM (Pachitariu et al., 2025) | flow fields and gradient tracking | [MouseLand/cellpose](https://github.com/MouseLand/cellpose) |
+| StarDist (Schmidt et al., 2018) | star-convex polygons | [stardist/stardist](https://github.com/stardist/stardist) |
+| YOLO11m-seg (Jocher and Qiu, 2024) | one-stage detection with mask prototypes | [ultralytics/ultralytics](https://github.com/ultralytics/ultralytics) |
 
 ## Installation
 
 ```bash
-git clone https://github.com/<organization>/cIEF-Net.git
+git clone https://github.com/ief-udb/cIEF-Net.git
 cd cIEF-Net
 conda env create -f environment.yml      # or: pip install -r requirements.txt
 conda activate cief-net
@@ -99,30 +115,63 @@ gated: accept the DINOv3 license on the model page and run
 `huggingface-cli login` once. A local copy can be used with
 `--backbone /path/to/folder`.
 
-## Data
+## Datasets
 
-The expected layout is documented in [`data/README.md`](data/README.md).
-In short, each collection has a folder of images with one
-[LabelMe](https://github.com/wkentaro/labelme) JSON file per image (one
-polygon per conidium), and partition manifests live in `data/splits/`:
+[![Data and annotations](https://img.shields.io/badge/download-Zenodo-1682d4)](https://doi.org/10.5281/zenodo.XXXXXXX)
+
+The study uses one source collection and four target collections of
+bright-field micrographs, annotated at the instance level (one polygon per
+conidium).
+
+| Taxon | Role | Training / support images | Test images | Total images | Annotated conidia | Conidia per image (mean +- SD) |
+|---|---|---|---|---|---|---|
+| *Alternaria alternata* ATCC 20084 | source | 116 | 30 | 146 | 24 686 | 169.1 +- 154.8 |
+| *Lasiodiplodia* spp. (four species) | target | 53 | 117 | 170 | 518 | 3.0 +- 2.6 |
+| *Colletotrichum siamense* | target | 39 | 20 | 59 | 912 | 15.5 +- 16.4 |
+| *Neopestalotiopsis* sp. | target | 45 | 38 | 83 | 374 | 4.5 +- 4.6 |
+| *Hortaea werneckii* | target | 24 | 63 | 87 | 11 135 | 128.0 +- 71.1 |
+| **Total** | | | | **545** | **37 625** | |
+
+For the target taxa, the training/support column counts the distinct images
+used by any of the support sets (5 and 10 images, four seeds).
+
+* **Acquisition of the institutional collections** (*A. alternata*,
+  *H. werneckii*): Motic Panthera L microscope, bright field, 100x with
+  immersion oil, images captured through the eyepiece with smartphones.
+  *A. alternata* images range from 1.31 to 7.99 megapixels (median 6.99), in
+  two acquisition-resolution groups; *H. werneckii* images range from 1.23 to
+  50.14 megapixels (median 12.53).
+* **Density.** *A. alternata* is the densest collection, with up to 693
+  conidia in one image and frequent touching or overlapping conidia.
+* **Curation.** Near-duplicate images were screened before partitioning
+  (ORB keypoints with RANSAC verification and EfficientNet-B0 embedding
+  clusters; see [`curation/`](curation/)).
+* **Partitions.** The *A. alternata* training set is divided into four
+  cross-validation folds stratified by instance density and resolution group;
+  target collections have a fixed test set and support sets of 5 and 10
+  images drawn with seeds 42, 7, 123 and 2024.
+
+The *A. alternata* and *H. werneckii* images, all instance annotations and
+the partition manifests are available on
+**[Zenodo](https://doi.org/10.5281/zenodo.XXXXXXX)** under CC BY-NC 4.0. The
+TgFC images (*C. siamense*, *Neopestalotiopsis* sp.) are available from their
+original publication under CC BY 4.0; the *Lasiodiplodia* images are subject
+to the permission of their rights holders.
+
+The expected folder layout and file formats are documented in
+[`data/README.md`](data/README.md):
 
 ```
 data/
-├── alternaria_alternata/images/      146 micrographs (+ .json)
+├── alternaria_alternata/images/      images + LabelMe .json
 ├── lasiodiplodia/images/
 ├── colletotrichum_siamense/images/
 ├── neopestalotiopsis/images/
 ├── hortaea_werneckii/images/
 └── splits/
-    ├── alternaria_alternata.csv      image,fold   (folds 0-3 and test)
-    └── fewshot/<species>/<N>shot_s<seed>.csv     image,species,subset
+    ├── alternaria_alternata.csv                      image,fold
+    └── fewshot/<species>/<N>shot_s<seed>.csv         image,species,subset
 ```
-
-The *A. alternata* and *H. werneckii* images, all instance annotations and the
-partition manifests are available at **[DOI to be added]** under CC BY-NC 4.0.
-TgFC images (*C. siamense*, *Neopestalotiopsis* sp.) are available from their
-original publication under CC BY 4.0; the *Lasiodiplodia* source images are
-subject to the permission of their rights holders. See `data/README.md`.
 
 ## Pretrained models
 
@@ -202,6 +251,7 @@ Other tools:
 | `scripts/visualize_predictions.py` | Annotation versus prediction figures. |
 | `scripts/plot_history.py` | Training and validation curves. |
 | `scripts/convert_legacy_checkpoint.py` | Converts checkpoints of the original implementation. |
+| `scripts/prepare_splits.py` | Copies partition manifests into the layout of `data/splits/`. |
 
 ## Reproducing the paper
 
@@ -215,8 +265,8 @@ Other tools:
 Hyperparameters are collected in `experiments/config.sh`. Details, including
 the evaluation conventions and notes on determinism, are in
 [`docs/reproducibility.md`](docs/reproducibility.md). The comparison methods
-(Mask R-CNN, Cellpose-SAM, StarDist, YOLO11m-seg) are described in
-[`baselines/README.md`](baselines/README.md).
+(Mask R-CNN, Cellpose-SAM, StarDist, YOLO11m-seg) were trained with their
+public implementations, linked in [Comparison methods](#comparison-methods).
 
 ## Repository structure
 
@@ -237,7 +287,7 @@ cIEF-Net/
 ├── experiments/              reproduction scripts of the paper
 ├── data/                     datasets and partition manifests (not versioned)
 ├── checkpoints/              pretrained weights (not versioned)
-├── baselines/                notes on the comparison methods
+├── baselines/                settings of the comparison methods (links to their code)
 ├── curation/                 dataset curation tools
 ├── docs/                     reproducibility notes and figures
 └── tests/                    unit tests (pytest)
@@ -245,16 +295,17 @@ cIEF-Net/
 
 ## Citation
 
-If you use this code, the data or the pretrained models, please cite:
+The manuscript describing cIEF-Net is in preparation; citation details will
+be added here. Until then, please cite this repository (see also
+[`CITATION.cff`](CITATION.cff)):
 
 ```bibtex
-@article{ojeda2026ciefnet,
-  title   = {Instance-Level Segmentation of {Alternaria alternata} Conidia and Few-Shot Adaptation across Fungal Taxa},
-  author  = {Ojeda, Sebastian and Cely, Sebastian and Aguilera, Astrid M. and Moreno, Elkin Alfredo and
-             Guerrero Arroyave, Claudia Patricia and Correal Cuervo, Sergio Andres},
-  journal = {Plant Methods},
-  year    = {2026},
-  note    = {In submission}
+@software{ciefnet2026,
+  title  = {{cIEF-Net}: instance segmentation of fungal conidia and few-shot adaptation across fungal taxa},
+  author = {Ojeda, Sebastian and Cely, Sebastian and Aguilera, Astrid M. and Moreno, Elkin Alfredo and
+            Guerrero Arroyave, Claudia Patricia and Correal Cuervo, Sergio Andres},
+  year   = {2026},
+  url    = {https://github.com/ief-udb/cIEF-Net}
 }
 ```
 

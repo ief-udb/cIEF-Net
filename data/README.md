@@ -1,7 +1,9 @@
 # Data
 
-This folder is not versioned (see `.gitignore`). Download the released data
-from **[repository and DOI to be added]** and place it as follows.
+Images and annotations are not versioned in this repository (see
+`.gitignore`). Download them from
+**[Zenodo](https://doi.org/10.5281/zenodo.XXXXXXX)** and place them as follows.
+The partition manifests in `splits/` are versioned here.
 
 ```
 data/
@@ -60,6 +62,13 @@ Only `shapes[*].points` is read; polygons with fewer than three vertices are
 ignored.
 
 ## Partition manifests
+
+There is one manifest for the source domain and one sub-folder per target
+taxon for the few-shot manifests, with one file per support size and seed
+(2 sizes x 4 seeds = 8 files per taxon, 32 in total). Manifests from the
+original implementation (e.g. `split_5folds.csv`,
+`split_fewshot_5_colletotrichum_siamense_s42.csv`) can be copied into this
+layout, with English column names, by `scripts/prepare_splits.py`.
 
 **Source domain** (`splits/alternaria_alternata.csv`): columns `image,fold`.
 `fold` is `0`, `1`, `2` or `3` for the four cross-validation folds of the 116

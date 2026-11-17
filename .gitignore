@@ -3,6 +3,7 @@ data/**
 !data/**/
 !data/README.md
 !data/**/.gitkeep
+!data/splits/**/*.csv
 checkpoints/**
 !checkpoints/**/
 !checkpoints/README.md
