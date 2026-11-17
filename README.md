@@ -20,9 +20,9 @@ a **polar harmonic contour refiner**.
 This repository contains the code to train, evaluate and apply cIEF-Net and to
 reproduce the experiments of the paper.
 
-<!-- Architecture figure: save it as docs/figures/architecture.png -->
+<!-- Architecture figure: save it as docs/figures/architecture.jpg -->
 <p align="center">
-  <img src="docs/figures/architecture.png" width="90%" alt="Architecture of cIEF-Net">
+  <img src="docs/figures/architecture.jpg" width="90%" alt="Architecture of cIEF-Net">
 </p>
 <p align="center"><em>Architecture of cIEF-Net.</em></p>
 
