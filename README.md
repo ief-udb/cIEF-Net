@@ -4,7 +4,7 @@
 
 **Instance-level segmentation of *Alternaria alternata* conidia and few-shot adaptation across fungal taxa**
 
-[![Data and annotations](https://img.shields.io/badge/data%20%26%20annotations-Zenodo-1682d4)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![Data and annotations](https://img.shields.io/badge/data%20%26%20annotations-Zenodo-1682d4)](https://doi.org/10.5281/zenodo.24371322)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776ab)](#installation)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-ee4c2c)](#installation)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey)](LICENSE)
