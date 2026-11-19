@@ -117,7 +117,7 @@ gated: accept the DINOv3 license on the model page and run
 
 ## Datasets
 
-[![Data and annotations](https://img.shields.io/badge/download-Zenodo-1682d4)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![Data and annotations](https://img.shields.io/badge/download-Zenodo-1682d4)](https://doi.org/10.5281/zenodo.24371322)
 
 The study uses one source collection and four target collections of
 bright-field micrographs, annotated at the instance level (one polygon per
@@ -153,7 +153,7 @@ used by any of the support sets (5 and 10 images, four seeds).
 
 The *A. alternata* and *H. werneckii* images, all instance annotations and
 the partition manifests are available on
-**[Zenodo](https://doi.org/10.5281/zenodo.XXXXXXX)** under CC BY-NC 4.0. The
+**[Zenodo](https://doi.org/10.5281/zenodo.24371322)** under CC BY-NC 4.0. The
 TgFC images (*C. siamense*, *Neopestalotiopsis* sp.) are available from their
 original publication under CC BY 4.0; the *Lasiodiplodia* images are subject
 to the permission of their rights holders.
